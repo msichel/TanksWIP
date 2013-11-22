@@ -130,28 +130,28 @@ void draw()
           p1.move(new PVector(p1.pos.x+1, height -(terrain.get(int(p1.pos.x+3)))-2));
         }
       }
-      else if (keyCode==UP)
+      else if (key == 'a')
       {
         if (p1.ang<180)
         {
           p1.ang++;
         }
       }
-      else if (keyCode==DOWN)
+      else if (key == 'd')
       {
         if (p1.ang>0)
         {
           p1.ang--;
         }
       }
-      else if (key == '-')
+      else if (keyCode==DOWN)
       {
         if (p1.pow>20)
         {
           p1.pow--;
         }
       }
-      else if (key == '=')
+      else if (keyCode==UP)
       {
         if (p1.pow<100)
         {
@@ -187,28 +187,28 @@ void draw()
           p2.move(new PVector(p2.pos.x+1, height -(terrain.get(int(p2.pos.x+3)))-2));
         }
       }
-      else if (keyCode==UP)
+      else if (key == 'a')
       {
         if (p2.ang<180)
         {
           p2.ang++;
         }
       }
-      else if (keyCode==DOWN)
+      else if (key == 'd')
       {
         if (p2.ang>0)
         {
           p2.ang--;
         }
       }
-      else if (key == '-')
+      else if (keyCode==DOWN)
       {
         if (p2.pow>20)
         {
           p2.pow--;
         }
       }
-      else if (key == '=')
+      else if (keyCode==UP)
       {
         if (p2.pow<100)
         {
