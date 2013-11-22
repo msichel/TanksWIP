@@ -58,7 +58,7 @@ void draw()
           if (int(b.pos.x)+r>0&&int(b.pos.x)+r<width)
           {
             float t = terrain.get(int(b.pos.x)+r);
-            float h = sqrt(sq(b.radius)-sq(r));
+            float h = sqrt(sq(b.radius)-sq(float(r)));
             if (t>b.pos.y+h)
             {
               print("a");
