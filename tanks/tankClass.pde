@@ -21,21 +21,25 @@ class tank
   }
   void move(PVector npos)
   {
-    if(!shot)
+    if (npos.x>=0&&npos.x<width)
     {
-      pos = npos;
+      if (!shot)
+      {
+        pos = npos;
+      }
     }
   }
   void display()
   {
-    if(play1)
+    if (play1)
     {
-      fill(0,0,255);
+      fill(0, 0, 255);
     }
     else
     {
-      fill(255,0,0);
+      fill(255, 0, 0);
     }
-    rect(pos.x,pos.y,4,2);
+    rect(pos.x, pos.y, 4, 2);
   }
 }
+
