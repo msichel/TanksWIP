@@ -7,17 +7,16 @@ boolean fired = false;
 void setup()
 {
   float level = random(150, 300); 
-  float slope = 0;
+  float slope = random(-1.5,1.5);
   size (800, 450);
   noStroke();
   for (int i = 0; i<width; i++)
   {
-    terrain.append(level);
-    if (level<=150)
+    if (level<=150||slope <=-1.5)
     {
       slope+= random(.1);
     }
-    else if (level>=300)
+    else if (level>=300||slope>=1.5)
     {
       slope-=random(.1);
     }
@@ -25,7 +24,16 @@ void setup()
     {
       slope +=random(-.1, .1);
     }
+//    if(slope>5)
+//    {
+//      slope = 5;
+//    }
+//    else if(slope<-5)
+//    {
+//      slope = -5;
+//    }
     level+= slope;
+    terrain.append(level);
   }
   float rand = random(25, 300);
   p1 = new tank(new PVector(rand-2, height-terrain.get(int(rand))-2), true);
@@ -37,12 +45,12 @@ void draw()
 {
   background(0, 255, 255);
   fill(255, 127, 0);
-  text("Health: " + p1.health, 10, 10);
-  text("Power: " + p1.pow, 10, 20);
-  text("Angle: " + p1.ang, 10, 30);
-  text("Health: " + p2.health, width-75, 10);
-  text("Power: " + p2.pow, width-75, 20);
-  text("Angle: " + p2.ang, width-75, 30);
+  text("Health: " + int(p1.health), 10, 10);
+  text("Power: " + int(p1.pow), 10, 20);
+  text("Angle: " + int(p1.ang), 10, 30);
+  text("Health: " + int(p2.health), width-75, 10);
+  text("Power: " + int(p2.pow), width-75, 20);
+  text("Angle: " + int(p2.ang), width-75, 30);
   for (int s = 0;s<shot.size();s++)
   {
     bullet b = shot.get(s);
@@ -52,6 +60,17 @@ void draw()
     {
       if (b.pos.y<=terrain.get(int(b.pos.x)))
       {
+        b.pos.y=terrain.get(int(b.pos.x));
+        float d1 = dist(b.pos.x,height - b.pos.y,p1.pos.x,p1.pos.y);
+        float d2 = dist(b.pos.x,height - b.pos.y,p2.pos.x,p2.pos.y);
+        if(d1<= b.radius)
+        {
+          p1.damage(b.radius-d1);
+        }
+        if(d2<= b.radius)
+        {
+          p2.damage(b.radius-d2);
+        }
         for (int r = -b.radius;r<b.radius;r++)
         {
           //Problems with these if statements.  Trying to detect if terrain is above or inside a circle
@@ -67,11 +86,12 @@ void draw()
             {
               terrain.set(int(b.pos.x)+r,(b.pos.y-h));
             }
-//            else
-//            {
-//              print("c");
-//            }
             float tf = terrain.get(int(b.pos.x)+r);
+            if(tf<0)
+            {
+              tf = 0;
+              terrain.set(int(b.pos.x)+r,0);
+            }
             if(b.pos.x+float(r)==p1.pos.x)
             {
               p1.pos.y = height-tf-2;
@@ -234,6 +254,22 @@ void draw()
         }
       }
     }
+  }
+  if(p1.health<=0)
+  {
+    noLoop();
+    background(0);
+    textSize(50);
+    textAlign(CENTER);
+    text("P2 WINS!",width/2,height/2);
+  }
+  else if(p2.health<=0)
+  {
+    noLoop();
+    background(0);
+    textSize(50);
+    textAlign(CENTER);
+    text("P1 WINS!",width/2,height/2);
   }
 }
 
