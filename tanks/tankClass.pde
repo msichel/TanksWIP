@@ -23,7 +23,7 @@ class tank
   {
     if (npos.x>=0&&npos.x<width)
     {
-      if (!shot)
+      if (!shot&&pos.y-npos.y<=5)
       {
         pos = npos;
       }

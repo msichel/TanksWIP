@@ -71,6 +71,15 @@ void draw()
 //            {
 //              print("c");
 //            }
+            float tf = terrain.get(int(b.pos.x)+r);
+            if(b.pos.x+float(r)==p1.pos.x)
+            {
+              p1.pos.y = height-tf-2;
+            }
+            if(b.pos.x+float(r)==p2.pos.x)
+            {
+              p2.pos.y = height-tf-2;
+            }
           }
         }
         print("\n");
