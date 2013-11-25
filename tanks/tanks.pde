@@ -61,16 +61,16 @@ void draw()
             float h = sqrt(sq(b.radius)-sq(float(r)));
             if (t>b.pos.y+h)
             {
-              print("a");
+              terrain.add(int(b.pos.x)+r,-2*h);
             }
-            else if (t<b.pos.y-h)
+            else if (t>b.pos.y-h)
             {
-              print("b");
+              terrain.set(int(b.pos.x)+r,(b.pos.y-h));
             }
-            else
-            {
-              print("c");
-            }
+//            else
+//            {
+//              print("c");
+//            }
           }
         }
         print("\n");
