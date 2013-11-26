@@ -1,3 +1,7 @@
+PVector explosion;
+float rad;
+float ls = 0;
+float delay = 100;
 tank p1, p2;
 FloatList terrain = new FloatList();
 ArrayList<bullet> shot = new ArrayList<bullet>();
@@ -6,6 +10,8 @@ float startmove;
 boolean fired = false;
 void setup()
 {
+  explosion = new PVector(0,0);
+  rad = 0;
   float level = random(150, 300); 
   float slope = random(-1.5,1.5);
   size (800, 450);
@@ -102,7 +108,9 @@ void draw()
             }
           }
         }
-        print("\n");
+        rad = b.radius;
+        ls = millis();
+        explosion = b.pos;
         shot.remove(s);
       }
     }
@@ -254,6 +262,11 @@ void draw()
         }
       }
     }
+  }
+  if(millis()-ls<delay)
+  {
+    fill(255,255,127.5);
+    ellipse(explosion.x,height - explosion.y,2*rad,2*rad);
   }
   if(p1.health<=0)
   {
