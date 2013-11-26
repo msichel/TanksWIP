@@ -67,8 +67,8 @@ void draw()
       if (b.pos.y<=terrain.get(int(b.pos.x)))
       {
         b.pos.y=terrain.get(int(b.pos.x));
-        float d1 = dist(b.pos.x,height - b.pos.y,p1.pos.x,p1.pos.y);
-        float d2 = dist(b.pos.x,height - b.pos.y,p2.pos.x,p2.pos.y);
+        float d1 = dist(b.pos.x,b.pos.y,p1.pos.x,terrain.get(int(b.pos.x)));
+        float d2 = dist(b.pos.x,b.pos.y,p2.pos.x,terrain.get(int(b.pos.x)));
         if(d1<= b.radius)
         {
           p1.damage(b.radius-d1);
