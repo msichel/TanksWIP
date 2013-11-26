@@ -274,6 +274,7 @@ void draw()
     background(0);
     textSize(50);
     textAlign(CENTER);
+    fill(255,0,0);
     text("P2 WINS!",width/2,height/2);
   }
   else if(p2.health<=0)
@@ -282,6 +283,7 @@ void draw()
     background(0);
     textSize(50);
     textAlign(CENTER);
+    fill(0,0,255);
     text("P1 WINS!",width/2,height/2);
   }
 }
