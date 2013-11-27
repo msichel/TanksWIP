@@ -92,20 +92,20 @@ void draw()
             {
               terrain.set(int(b.pos.x)+r,(b.pos.y-h));
             }
-            float tf = terrain.get(int(b.pos.x)+r);
-            if(tf<0)
-            {
-              tf = 0;
-              terrain.set(int(b.pos.x)+r,0);
-            }
-            if(b.pos.x+float(r)==p1.pos.x)
-            {
-              p1.pos.y = height-tf-2;
-            }
-            if(b.pos.x+float(r)==p2.pos.x)
-            {
-              p2.pos.y = height-tf-2;
-            }
+//            float tf = terrain.get(int(b.pos.x)+r);
+//            if(tf<0)
+//            {
+//              tf = 0;
+//              terrain.set(int(b.pos.x)+r,0);
+//            }
+//            if(b.pos.x+float(r)==p1.pos.x)
+//            {
+//              p1.pos.y = height-tf-2;
+//            }
+//            if(b.pos.x+float(r)==p2.pos.x)
+//            {
+//              p2.pos.y = height-tf-2;
+//            }
           }
         }
         rad = b.radius;
@@ -267,6 +267,16 @@ void draw()
   {
     fill(255,255,127.5);
     ellipse(explosion.x,height - explosion.y,2*rad,2*rad);
+    if(dist(explosion.x,height - explosion.y,p1.pos.x,p1.pos.y)<=rad)
+    {
+      float t1 = terrain.get(int(p1.pos.x));
+      p1.pos.y = height - t1-2;
+    }
+    if(dist(explosion.x,height - explosion.y,p2.pos.x,p2.pos.y)<=rad)
+    {
+      float t2 = terrain.get(int(p2.pos.x));
+      p2.pos.y = height - t2-2;
+    }
   }
   if(p1.health<=0)
   {
