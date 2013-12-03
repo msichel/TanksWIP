@@ -201,14 +201,14 @@ void draw()
           p1.ang--;
         }
       }
-      else if (keyCode==DOWN)
+      else if (key=='s')
       {
         if (p1.pow>20)
         {
           p1.pow--;
         }
       }
-      else if (keyCode==UP)
+      else if (key=='w')
       {
         if (p1.pow<100)
         {
@@ -293,14 +293,14 @@ void draw()
           p2.ang--;
         }
       }
-      else if (keyCode==DOWN)
+      else if (key=='s')
       {
         if (p2.pow>20)
         {
           p2.pow--;
         }
       }
-      else if (keyCode==UP)
+      else if (key=='w')
       {
         if (p2.pow<100)
         {
