@@ -8,6 +8,7 @@ ArrayList<bullet> shot = new ArrayList<bullet>();
 boolean turn1 = true;
 float startmove;
 boolean fired = false;
+int firemode = 0;
 void setup()
 {
   explosion = new PVector(0,0);
@@ -41,15 +42,40 @@ void setup()
 }
 void draw()
 {
+  String type;
+  if(firemode == 0)
+  {
+    type = "Normal Shot";
+  }
+  else if (firemode == 1)
+  {
+    type = "Big Shot";
+  }
+  else
+  {
+    type = "Spread Shot";
+  }
   background(0, 255, 255);
   fill(255, 127, 0);
   textSize(12);
   text("Health: " + int(p1.health), 10, 10);
   text("Power: " + int(p1.pow), 10, 20);
   text("Angle: " + int(p1.ang), 10, 30);
-  text("Health: " + int(p2.health), width-75, 10);
-  text("Power: " + int(p2.pow), width-75, 20);
-  text("Angle: " + int(p2.ang), width-75, 30);
+  text("Big Shots: "+ p1.num1,10,40);
+  text("Spread Shots: "+p1.num2,10,50);
+  text("Health: " + int(p2.health), width-100, 10);
+  text("Power: " + int(p2.pow), width-100, 20);
+  text("Angle: " + int(p2.ang), width-100, 30);
+  text("Big Shots: "+ p2.num1,width-100,40);
+  text("Spread Shots: "+p2.num2,width-100,50);
+  if(turn1)
+  {
+    text(type,10,60);
+  }
+  else
+  {
+    text(type,width-100,60);
+  }
   for (int s = 0;s<shot.size();s++)
   {
     bullet b = shot.get(s);
@@ -127,6 +153,7 @@ void draw()
       if (shot.size()==0)
       {
         fired = false;
+        firemode = 0;
         if (turn1)
         {
           startmove = p2.pos.x;
@@ -188,12 +215,46 @@ void draw()
           p1.pow++;
         }
       }
+      else if (key =='1')
+      {
+        firemode = 0;
+      }
+      else if (key =='2')
+      {
+        if (p1.num1>0)
+        {
+          firemode = 1;
+        }
+      }
+      else if (key =='3')
+      {
+        if (p1.num2>0)
+        {
+          firemode = 2;
+        }
+      }   
       else if (key == ' ')
       {
         if (!p1.shot)
         {
-          shot.add(new bullet(new PVector(p1.pos.x, terrain.get(int(p1.pos.x+2))+2), new PVector(p1.pow*cos(radians(p1.ang))/10, p1.pow*sin(radians(p1.ang))/10)));
+          if(firemode<2)
+          {
+            shot.add(new bullet(new PVector(p1.pos.x, terrain.get(int(p1.pos.x+2))+2), new PVector(p1.pow*cos(radians(p1.ang))/10, p1.pow*sin(radians(p1.ang))/10),firemode));
+            if (firemode == 1)
+            {
+              p1.num1--;
+            }
+          }
+           else
+          {
+            for (int i = -10;i<=10;i+=5)
+            {
+              shot.add(new bullet(new PVector(p1.pos.x, terrain.get(int(p1.pos.x+2))+2), new PVector(p1.pow*cos(radians(p1.ang+(float(i)/2)))/10, p1.pow*sin(radians(p1.ang+(float(i)/2)))/10),firemode));
+            }
+            p1.num2--;
+          }
           p1.fire();
+//          firemode = 0;
           fired = true;
         }
       }
@@ -245,12 +306,46 @@ void draw()
           p2.pow++;
         }
       }
+      else if (key =='1')
+      {
+        firemode = 0;
+      }
+      else if (key =='2')
+      {
+        if(p2.num1>0)
+        {
+          firemode = 1;
+        }
+      }
+      else if (key =='3')
+      {
+        if(p2.num2 >0)
+        {
+          firemode = 2;
+        }
+      } 
       else if (key == ' ')
       {
         if (!p2.shot)
         {
-          shot.add(new bullet(new PVector(p2.pos.x, terrain.get(int(p2.pos.x+2))+2), new PVector(p2.pow*cos(radians(p2.ang))/10, p2.pow*sin(radians(p2.ang))/10)));
+          if (firemode<2)
+          {
+            shot.add(new bullet(new PVector(p2.pos.x, terrain.get(int(p2.pos.x+2))+2), new PVector(p2.pow*cos(radians(p2.ang))/10, p2.pow*sin(radians(p2.ang))/10),firemode));
+            if(firemode == 1)
+            {
+              p2.num1--;
+            }
+          }
+          else
+          {
+            for (int i = -10;i<=10;i+=5)
+            {
+            shot.add(new bullet(new PVector(p2.pos.x, terrain.get(int(p2.pos.x+2))+2), new PVector(p2.pow*cos(radians(p2.ang+(float(i)/2)))/10, p2.pow*sin(radians(p2.ang+(float(i)/2)))/10),firemode));
+            }
+            p2.num2--;
+          }
           p2.fire();
+//          firemode = 0;
           fired = true;
         }
       }

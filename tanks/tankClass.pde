@@ -6,6 +6,8 @@ class tank
   float pow = 50;
   boolean play1; 
   boolean shot = false;
+  int num1 = 2;
+  int num2 = 2;
   tank(PVector p, boolean p1)
   {
     pos = p;
