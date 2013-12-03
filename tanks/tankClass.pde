@@ -43,5 +43,19 @@ class tank
     }
     rect(pos.x, pos.y, 4, 2);
   }
+  void aim()
+  {
+    if(play1)
+    {
+      stroke(0,0,255);
+    }
+    else
+    {
+      stroke(255,0,0);
+    }
+    strokeWeight(1);
+    line(pos.x+2,pos.y,pos.x+2+10*cos(radians(ang)),pos.y-10*sin(radians(ang)));
+    noStroke();
+  }
 }
 

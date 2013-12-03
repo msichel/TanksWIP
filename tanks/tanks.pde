@@ -85,7 +85,6 @@ void draw()
     {
       if (b.pos.y<=terrain.get(int(b.pos.x)))
       {
-        b.pos.y=terrain.get(int(b.pos.x));
         float d1 = dist(b.pos.x,b.pos.y,p1.pos.x,terrain.get(int(b.pos.x)));
         float d2 = dist(b.pos.x,b.pos.y,p2.pos.x,terrain.get(int(b.pos.x)));
         if(d1<= b.radius)
@@ -171,6 +170,7 @@ void draw()
   }
   else if (turn1)
   {
+    p1.aim();
     if (keyPressed)
     {
       if (keyCode==LEFT)
@@ -262,6 +262,7 @@ void draw()
   }
   else
   {
+    p2.aim();
     if (keyPressed)
     {
       if (keyCode==LEFT)
@@ -355,12 +356,12 @@ void draw()
   {
     fill(255,255,127.5);
     ellipse(explosion.x,height - explosion.y,2*rad,2*rad);
-    if(dist(explosion.x,height - explosion.y,p1.pos.x,p1.pos.y)<=rad)
+    if(dist(explosion.x,0,p1.pos.x,0)<=rad)
     {
       float t1 = terrain.get(int(p1.pos.x));
       p1.pos.y = height - t1-2;
     }
-    if(dist(explosion.x,height - explosion.y,p2.pos.x,p2.pos.y)<=rad)
+    if(dist(explosion.x,0,p2.pos.x,0)<=rad)
     {
       float t2 = terrain.get(int(p2.pos.x));
       p2.pos.y = height - t2-2;

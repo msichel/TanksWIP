@@ -1,6 +1,5 @@
 class bullet
 {
-  int smode;
   PVector pos;
   PVector vel;
   PVector acc = new PVector(0,-.1);
@@ -21,7 +20,14 @@ class bullet
   }
   void display()
   {
-    fill(255,127,0);
+    if(radius==40)
+    {
+      fill(255,0,0);
+    }
+    else
+    {
+      fill(255,255,0);
+    }
     ellipse(pos.x,height -pos.y,5,5);
   }
 }
